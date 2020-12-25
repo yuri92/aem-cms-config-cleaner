@@ -1,15 +1,22 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "target": "es2015",
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
     "module": "es2020",
-    "lib": ["es2017", "es7", "es6", "dom"],
-    "declaration": true,
-    "outDir": "dist",
-    "strict": false,
-    "esModuleInterop": true
-  },
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+  }
 }
