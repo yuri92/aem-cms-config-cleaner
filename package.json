@@ -2,9 +2,11 @@
   "name": "@sm1/aem-cms-config-cleaner",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "src/index.min.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.js",
+    "test": "echo \"No test specified\"",
+    "prepublish": "minify src/index.js > ../dist/index.min.js"
   },
   "repository": {
     "type": "git",
@@ -17,9 +19,10 @@
   },
   "homepage": "https://github.com/yuri92/aem-cms-config-cleaner#readme",
   "devDependencies": {
-    "@types/node": "^14.14.16",
-    "nodemon": "^2.0.6",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.1.3"
+    "minify": "^6.0.1",
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "lodash": "^4.17.20"
   }
 }
