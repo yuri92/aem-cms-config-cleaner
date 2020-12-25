@@ -1,7 +1,7 @@
-const  { groupBy, countBy, chunk } = require('lodash');
+import { groupBy, countBy, chunk } from 'lodash-es';
 const MULTIFIELD_REGEX = /(.item)(\d+)/;
 
-module.exports = {
+export = {
     processJson : (toProcess) => {
         let json = flatten(toProcess);
         for (const [key, value] of Object.entries(json)) {
