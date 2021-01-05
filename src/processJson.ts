@@ -1,8 +1,10 @@
-import { groupBy, countBy, chunk } from 'lodash-es';
+import { groupBy } from 'lodash-es';
+
 const MULTIFIELD_REGEX = /(.item)(\d+)/;
 
 export const processJson = toProcess => {
     let json = flatten(toProcess);
+
     for (const [key, value] of Object.entries(json)) {
         let newKey = key.replace(/jcr:content./, '');
         newKey = newKey.replace(/content./, '');
@@ -104,22 +106,33 @@ function processMultifield(json) {
         }
     }
 
+    
     keys = groupBy(keys, item => {
         const splitted = item.split('.');
         splitted.pop();
         splitted.pop();
-
+        
         return splitted.join('.');
     });
-
+    
     for (const [key, value] of Object.entries(keys)) {
-        // console.log(value)
-        const chunkCountValue = Object.keys(countBy(value, item => {
-            const splittedItem = item.split('.');
-            return splittedItem[splittedItem.length - 1];
-        })).length;
+        
+        const itemKeys = new Set();
+        value.forEach(v => {
+            const valueSplit = v.split('.');
+            const itemName = valueSplit[valueSplit.length - 2];
+            itemKeys.add(itemName)
+        });
 
-        const chunkedArray = chunk(value, chunkCountValue);
+        const chunkedArray = [];
+        itemKeys.forEach(k => {
+            const filteredItemsByKey = value.filter(v => {
+                const valueSplit = v.split('.');
+                const itemName = valueSplit[valueSplit.length - 2];
+                return itemName === k
+            })
+            chunkedArray.push(filteredItemsByKey)
+        })
 
         let i = 0;
         chunkedArray.forEach(arr => {
