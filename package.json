@@ -13,7 +13,7 @@
     "dev:debug": "nodemon --config nodemon.json --inspect-brk src/index.ts",
     "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "publish": "npm run tsc && npm run np",
-    "np" : "np"
+    "np": "np"
   },
   "repository": {
     "type": "git",
