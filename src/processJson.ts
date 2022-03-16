@@ -1,4 +1,4 @@
-import { groupBy } from 'lodash-es';
+import {groupBy} from 'lodash-es';
 
 const MULTIFIELD_REGEX = /(.item)(\d+)/;
 
@@ -11,7 +11,10 @@ export const processJson = toProcess => {
         newKey = camelize(newKey, '-');
         newKey = camelize(newKey, ':');
         newKey = camelize(newKey);
-        renameKey(json, key, newKey);
+
+        if (newKey !== key) {
+            renameKey(json, key, newKey);
+        }
     }
     processMultifield(json);
     json = unflatten(json);
@@ -106,12 +109,12 @@ function processMultifield(json) {
         }
     }
 
-    
+
     keys = groupBy(keys, item => {
         const splitted = item.split('.');
         splitted.pop();
         splitted.pop();
-        
+
         return splitted.join('.');
     });
 
@@ -119,9 +122,9 @@ function processMultifield(json) {
     Object.entries(keys).forEach(([key, value]) => {
         keys[key].sort()
     })
-    
+
     for (const [key, value] of Object.entries(keys)) {
-        
+
         const itemKeys = new Set();
         value.forEach(v => {
             const valueSplit = v.split('.');
