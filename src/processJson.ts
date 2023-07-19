@@ -119,9 +119,9 @@ function processMultifield(json) {
     });
 
     //ordino le chiavi per il nome dell'item
-    Object.entries(keys).forEach(([key, value]) => {
+    /*Object.entries(keys).forEach(([key, value]) => {
         keys[key].sort()
-    })
+    })*/
 
     for (const [key, value] of Object.entries(keys)) {
 
