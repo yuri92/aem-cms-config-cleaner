@@ -4,6 +4,9 @@
   "description": "",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "files": [
     "lib/"
   ],
